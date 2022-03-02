@@ -15,12 +15,14 @@ and the other as a list of locked files. <br>
 
 Here’s the algorithm graph that details the thread safety mechanism that is applied when a user is 
 trying to upload a file:<br>
-![image](https://user-images.githubusercontent.com/50183122/154843470-9bc41a9f-ab04-4a3e-a97f-bce368ab3919.png)<br>
+<img src="https://user-images.githubusercontent.com/50183122/154843470-9bc41a9f-ab04-4a3e-a97f-bce368ab3919.png" width="70%" height="70%"><br>
+
 *Note:* The OFFER message that is sent by the master server to other servers is excluded from the graph, 
 because it is not even sent to other servers if the upload is failed on the master server.
 
 #### More that on thread is trying to lock the same file
-![image](https://user-images.githubusercontent.com/50183122/154843538-6f99aa64-11f9-41df-8a57-e58274c41908.png)<br>
+<img src="https://user-images.githubusercontent.com/50183122/154843538-6f99aa64-11f9-41df-8a57-e58274c41908.png" width="55%" height="55%"><br>
+
 *Notes:*
 1.	The Lock message that is sent by the master server to other servers is excluded from the graph, because it is not even sent to other servers if the lock operations is failed on the master server.
 2.	After the file is unlocked, it is removed from the locked files indexer
