@@ -6,8 +6,7 @@ ConcurrentHashMap. <br>
 One of the calls will always occur first, and the second will wait for it to complete. This is part of a 
 ConcurrentMap's thread safety.<br>
 
-### These are the cases where I needed to implement some thread safety mechanism
-#### More than one thread is trying to upload a file with the same name at the same time.
+### More than one thread is trying to upload a file with the same name at the same time.
 To solve the problem here, two ConcurrentHashMap were implemented, one for the file indexer, 
 and the other as a list of locked files. <br>
 **File indexer map** contains files name as the key, and the hash digest info as the value. <br>
@@ -20,14 +19,14 @@ trying to upload a file:<br>
 *Note:* The OFFER message that is sent by the master server to other servers is excluded from the graph, 
 because it is not even sent to other servers if the upload is failed on the master server.
 
-#### More that on thread is trying to lock the same file
+### More that on thread is trying to lock the same file
 <img src="https://user-images.githubusercontent.com/50183122/154843538-6f99aa64-11f9-41df-8a57-e58274c41908.png" width="55%" height="55%"><br>
 
 *Notes:*
 1.	The Lock message that is sent by the master server to other servers is excluded from the graph, because it is not even sent to other servers if the lock operations is failed on the master server.
 2.	After the file is unlocked, it is removed from the locked files indexer
 
-#### More than one thread is trying to update the status box in the client 
+### More than one thread is trying to update the status box in the client 
 Since the communication between the client and server on the client side is each own thread, such 
 each thread might try to update the Status box at the same time if the client is doing an operation 
 on all servers. 
